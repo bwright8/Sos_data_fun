@@ -38,16 +38,15 @@ print(type(qs))
 cursor.execute("SELECT * FROM charter_officer_business;")
 qs = cursor.fetchall()
 
-i = 0
+cursor.execute("SELECT * FROM master;")
+ps = cursor.fetchall()
 
-for q in qs:
-    i += 1
-    print(i)
-    name = q[11]
-    cursor.execute("SELECT * FROM master WHERE name @@ plainto_tsquery("+
-        name+") LIMIT 5;")
-    ps = cursor.fetchall()
+fn_dict = {}
 
+for i in range(len(ps)):
+    fn_dict[ps[i][4]] = ps[i][0]
+
+"""
     for p in ps:
 
         f1 = q[0]
@@ -55,4 +54,18 @@ for q in qs:
         cursor.execute("INSERT INTO cob_edges VALUES ("+
             f1+","+f2+");")
         pass
+"""
+
+for q in qs:
+    name = q[11]
+    if(name in fn_dict.keys()):
+        #print("hello world")
+        f1 = q[0]
+        f2 = fn_dict[name]
+        cursor.execute("INSERT INTO cob_edges (node_i,node_t) VALUES ('"+
+            f1+"','"+f2+"');")
+
+conn.commit()
+cursor.close()
+conn.close()
 
