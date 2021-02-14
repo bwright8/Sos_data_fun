@@ -22,3 +22,5 @@ CREATE TABLE MASTER (
     BOC_DATE TEXT
 );
 CREATE INDEX ON MASTER(FILING_NUM);
+CREATE INDEX idx_fts_name_func ON master USING gin(to_tsvector('english',name));
+CREATE INDEX idx_fts_dba_name_func ON master USING gin(to_tsvector('english',name));
