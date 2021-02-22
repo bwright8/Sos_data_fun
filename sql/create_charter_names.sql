@@ -14,3 +14,4 @@ CREATE TABLE CHARTER_NAMES (
     RESERVED TEXT
 );
 CREATE INDEX ON CHARTER_NAMES(FILING_NUM);
+CREATE INDEX idx_c_name ON charter_names USING gin(to_tsvector('english',name));
