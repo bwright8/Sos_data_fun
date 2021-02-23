@@ -12,3 +12,4 @@ CREATE TABLE REGISTERED_AGENT_BUSINESS (
     BUSINESS_NAME TEXT
 );
 CREATE INDEX ON REGISTERED_AGENT_BUSINESS(FILING_NUM);
+CREATE INDEX idx_fts_business_name ON registered_agent_business USING gin(to_tsvector('english',business_name));

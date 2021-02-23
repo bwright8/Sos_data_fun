@@ -12,3 +12,6 @@ SELECT * FROM charter_officer_business WHERE business_name @@ to_tsquery('BEACH'
 
 SELECT * FROM charter_names WHERE name @@ to_tsquery('HEART') LIMIT 25;
 SELECT * FROM charter_names WHERE name @@ to_tsquery('EARTH') LIMIT 25;
+
+SELECT * FROM associated_entity WHERE ASSOCIATED_ENTITY_NAME @@ to_tsquery('ROBERT') LIMIT 25;
+SELECT * FROM associated_entity WHERE ASSOCIATED_ENTITY_NAME @@ to_tsquery('JANE') LIMIT 25;
